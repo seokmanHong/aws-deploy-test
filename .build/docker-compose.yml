@@ -5,7 +5,7 @@ services:
   studiomate-api-new:
     image: ${DOCKER_IMAGE_DIR}studiomate-api-new:${PHP_VERSION}
     env_file:
-      - ../.env
+      - ../.env.local
     build:
       context: studiomate-api
 #    volumes:
@@ -17,7 +17,7 @@ services:
   mysql:
     image: ${DOCKER_IMAGE_DIR}mysql:${MYSQL_VERSION}
     env_file:
-      - ../.env
+      - ../.env.local
     build:
       context: ./mysql
       args:
@@ -35,7 +35,7 @@ services:
   redis:
     image: ${DOCKER_IMAGE_DIR}redis:${REDIS_VERSION}
     env_file:
-      - ../.env
+      - ../.env.local
     build:
       context: ./redis
       args:

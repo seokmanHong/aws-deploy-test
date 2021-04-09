@@ -8,7 +8,7 @@
 /public/storage
 /storage/*.key
 /vendor
-.env
+.env.local
 .env.backup
 .env.testing
 .phpunit.result.cache
