@@ -6,12 +6,15 @@ phases:
       docker: 19
   pre_build:
     commands:
+      - echo Composer downloading package
+      - composer install --no-progress --ignore-platform-reqs
+      - echo test
+      - cp .env.$IMAGE_TAG .env
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login-password --region ap-northeast-2)
+      - echo $AWS_DEFAULT_REGION
+      - $(aws ecr get-login-password --region $AWS_DEFAULT_REGION)
       - REPOSITORY_URI=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
       - echo Build started on `date`
