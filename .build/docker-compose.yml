@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+
+  studiomate-api-new:
+    image: ${DOCKER_IMAGE_DIR}studiomate-api-new:${PHP_VERSION}
+    env_file:
+      - ../.env
+    build:
+      context: studiomate-api
+#    volumes:
+#      - ./storage/studiomate_api:/web/studiomate/api:cached
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: ${DOCKER_IMAGE_DIR}mysql:${MYSQL_VERSION}
+    env_file:
+      - ../.env
+    build:
+      context: ./mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_IMAGE}
+#    volumes:
+#      - ./storage/dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=laravel
+    # Add next command on windows environment
+    # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+
+  redis:
+    image: ${DOCKER_IMAGE_DIR}redis:${REDIS_VERSION}
+    env_file:
+      - ../.env
+    build:
+      context: ./redis
+      args:
+        - REDIS_VERSION=${REDIS_IMAGE}

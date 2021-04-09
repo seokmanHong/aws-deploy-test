@@ -1,0 +1,10 @@
+version: '3'
+services:
+  kspay:
+    build:
+      context: .
+      dockerfile: ./Docker/Dockerfile
+    container_name: kspay
+    ports:
+      - "29991:29991"
+    restart: always

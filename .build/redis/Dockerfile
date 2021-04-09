@@ -1,0 +1,4 @@
+ARG  REDIS_VERSION=latest
+FROM redis:${REDIS_VERSION}
+
+MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
