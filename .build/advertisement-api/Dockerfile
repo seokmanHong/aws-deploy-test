@@ -1,8 +1,8 @@
-FROM php:8.0.3-apache
+FROM php:8.0.5-apache
 
 ENV TZ="/usr/share/zoneinfo/Asia/Seoul"
 
-ARG PROJECT_DIRECTORY=/web/studiomate/api
+ARG PROJECT_DIRECTORY=/web/app
 
 RUN apt-get update
 
@@ -135,23 +135,6 @@ RUN chown -R www-data:www-data .
 #RUN chgrp -R www-data ./storage
 #RUN chmod -R ug+rwx ./storage
 #RUN chmod -R 0777 ./storage
-
-###############################################################################
-# Install Xdebug
-###############################################################################
-# Install xdebug by pecl
-RUN pecl install xdebug
-
-# Arguments
-ARG INI_PATH=/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-
-# Generate an ini file
-RUN touch ${INI_PATH}
-RUN echo "[xdebug]" >> ${INI_PATH}
-RUN echo "zend_extension = xdebug.so" >> ${INI_PATH}
-RUN echo "xdebug.mode = debug" >> ${INI_PATH}
-RUN echo "xdebug.start_with_request=yes" >> ${INI_PATH}
-RUN echo "xdebug.client_host=host.docker.internal" >> ${INI_PATH}
 
 COPY start.sh /usr/local/bin/start
 

@@ -1,10 +1,36 @@
-version: '3'
+version: '3.7'
+
 services:
-  kspay:
-    build:
-      context: .
-      dockerfile: ./Docker/Dockerfile
-    container_name: kspay
+  advertisement-api:
+    image: ${DOCKER_IMAGE_DIR}advertisement-api:${PHP_VERSION}
+    env_file:
+      - .env.local
+    volumes:
+      - .:/web/app
     ports:
-      - "29991:29991"
-    restart: always
+      - 8002:80
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: ${DOCKER_IMAGE_DIR}mysql:${MYSQL_VERSION}
+    command: "--innodb_use_native_aio=0"
+    env_file:
+      - .env.local
+    volumes:
+      - ./.build/storage/dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=laravel
+    # Add next command on windows environment
+    # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+
+  redis:
+    image: ${DOCKER_IMAGE_DIR}redis:${REDIS_VERSION}
+    env_file:
+      - .env.local
+    ports:
+      - "6379:6379"

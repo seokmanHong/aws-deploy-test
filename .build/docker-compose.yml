@@ -1,13 +1,12 @@
 version: '3.7'
 
 services:
-
-  studiomate-api-new:
-    image: ${DOCKER_IMAGE_DIR}studiomate-api-new:${PHP_VERSION}
+  advertisement-api:
+    image: ${DOCKER_IMAGE_DIR}advertisement-api:${PHP_VERSION}
     env_file:
       - ../.env.local
     build:
-      context: studiomate-api
+      context: advertisement-api
 #    volumes:
 #      - ./storage/studiomate_api:/web/studiomate/api:cached
     depends_on:
