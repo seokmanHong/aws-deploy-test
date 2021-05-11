@@ -102,7 +102,7 @@ RUN apt-get install -y supervisor
 ###############################################################################
 # configure apache
 ###############################################################################
-COPY .build/advertisement/site.conf /etc/apache2/sites-available/site.conf
+COPY site.conf /etc/apache2/sites-available/site.conf
 RUN a2dissite 000-default.conf && a2ensite site.conf
 RUN a2enmod rewrite
 
@@ -114,7 +114,7 @@ COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 ###############################################################################
 # configure php
 ###############################################################################
-COPY .build/advertisement/php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/php.ini
 
 ###############################################################################
 # install dependencies via composer
@@ -136,7 +136,7 @@ RUN chown -R www-data:www-data .
 #RUN chmod -R ug+rwx ./storage
 #RUN chmod -R 0777 ./storage
 
-COPY .build/advertisement/start.sh /usr/local/bin/start
+COPY start.sh /usr/local/bin/start
 
 ###############################################################################
 # Before run sh, change its crlf to lf
