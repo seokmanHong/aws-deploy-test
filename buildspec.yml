@@ -18,7 +18,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t $REPOSITORY_URI:$IMAGE_TAG -f .build/advertisement-api/Dockerfile .
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG -f ./.build/advertisement-api/Dockerfile .
   post_build:
     commands:
       - echo Build completed on `date`
