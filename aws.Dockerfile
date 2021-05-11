@@ -102,7 +102,7 @@ RUN apt-get install -y supervisor
 ###############################################################################
 # configure apache
 ###############################################################################
-COPY site.conf /etc/apache2/sites-available/site.conf
+COPY .build/advertisement/site.conf /etc/apache2/sites-available/site.conf
 RUN a2dissite 000-default.conf && a2ensite site.conf
 RUN a2enmod rewrite
 
