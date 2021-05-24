@@ -1,4 +1,5 @@
-FROM php:8.0.5-apache
+# FROM php:8.0.5-apache
+FROM 323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app:latest
 
 ENV TZ="/usr/share/zoneinfo/Asia/Seoul"
 
