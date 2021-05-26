@@ -72,7 +72,7 @@ COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 ###############################################################################
 # configure apache
 ###############################################################################
-COPY site.conf /etc/apache2/sites-available/site.conf
+COPY .build/advertisement-api-app/site.conf /etc/apache2/sites-available/site.conf
 RUN a2dissite 000-default.conf && a2ensite site.conf
 RUN a2enmod rewrite
 
