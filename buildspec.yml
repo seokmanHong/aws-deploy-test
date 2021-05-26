@@ -19,6 +19,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - docker build -t 323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app:latest -f aws.Dockerfile .
+      - docker tag 323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app:latest 323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app:latest
   post_build:
     commands:
       - echo Build completed on `date`
