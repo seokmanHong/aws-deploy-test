@@ -13,7 +13,7 @@ phases:
       - echo $AWS_DEFAULT_REGION
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
 #      - $(aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin "$(aws sts get-caller-identity --query Account --output text).dkr.ecr.ap-northeast-2.amazonaws.com")
-      - REPOSITORY_URI=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-api-app-app
+      - REPOSITORY_URI=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-api-app
   build:
     commands:
       - echo Build started on `date`

@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   advertiser-api:
-    image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${PHP_VERSION}
+    image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${WAS_VERSION}
     env_file:
       - .env.local
     volumes:
@@ -29,7 +29,7 @@ services:
     # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
 
   redis:
-    image: redis:${REDIS_VERSION}
+    image: ${REDIS_VERSION}
     env_file:
       - .env.local
     ports:
