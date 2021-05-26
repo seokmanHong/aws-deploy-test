@@ -1,4 +1,5 @@
-ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app
+# ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app-app
+ARG REPOSITORY=php:8.0.5-apache
 ARG IMAGE_VERSION=latest
 FROM $REPOSITORY:$IMAGE_VERSION
 
@@ -18,7 +19,7 @@ RUN apt-get install -y libpcre3-dev libzip-dev libxml2-dev git
 RUN docker-php-ext-install zip
 
 ###############################################################################
-# for mysql
+# for dbms
 ###############################################################################
 RUN docker-php-ext-install pdo pdo_mysql
 
@@ -99,7 +100,10 @@ RUN composer install \
 ###############################################################################
 COPY . $PROJECT_DIRECTORY
 
-RUN chown -R www-data:www-data .
+RUN mkdir -p $PROJECT_DIRECTORY/public
+VOLUME $PROJECT_DIRECTORY
+WORKDIR $PROJECT_DIRECTORY
+
 COPY start.sh /usr/local/bin/start
 
 ###############################################################################

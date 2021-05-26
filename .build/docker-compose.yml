@@ -1,28 +1,24 @@
 version: '3.7'
 
 services:
-  advertisement-api:
-    image: ${DOCKER_IMAGE_DIR}advertisement-api:${PHP_VERSION}
+  advertisement-api-app:
+    image: ${DOCKER_IMAGE_DIR}advertisement-api-app:${WAS_VERSION}
     env_file:
       - ../.env.local
     build:
-      context: advertisement-api
-#    volumes:
-#      - ./storage/studiomate_api:/web/studiomate/api:cached
+      context: advertisement-api-app
     depends_on:
-      - mysql
+      - dbms
       - redis
 
-  mysql:
-    image: ${DOCKER_IMAGE_DIR}mysql:${MYSQL_VERSION}
+  dbms:
+    image: ${DBMS}
     env_file:
       - ../.env.local
     build:
-      context: ./mysql
+      context: ./dbms
       args:
-        - MYSQL_VERSION=${MYSQL_IMAGE}
-#    volumes:
-#      - ./storage/dbdata:/var/lib/mysql
+        - DBMS=${DBMS}
     ports:
       - "3306:3306"
     environment:
@@ -32,10 +28,5 @@ services:
     # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
 
   redis:
-    image: ${DOCKER_IMAGE_DIR}redis:${REDIS_VERSION}
-    env_file:
-      - ../.env.local
-    build:
-      context: ./redis
-      args:
-        - REDIS_VERSION=${REDIS_IMAGE}
+    image: ${REDIS_VERSION}
+

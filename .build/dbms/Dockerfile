@@ -1,5 +1,4 @@
-ARG  MYSQL_VERSION=latest
-FROM mysql:${MYSQL_VERSION}
+FROM ${DBMS}
 
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 

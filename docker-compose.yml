@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   advertisement-api:
-    image: ${DOCKER_IMAGE_DIR}advertisement-api:${PHP_VERSION}
+    image: ${DOCKER_IMAGE_DIR}advertisement-api-app:${PHP_VERSION}
     env_file:
       - .env.local
     volumes:
@@ -14,12 +14,12 @@ services:
       - redis
 
   mysql:
-    image: ${DOCKER_IMAGE_DIR}mysql:${MYSQL_VERSION}
+    image: mysql:${MYSQL_VERSION}
     command: "--innodb_use_native_aio=0"
     env_file:
       - .env.local
     volumes:
-      - ./.build/storage/dbdata:/var/lib/mysql
+      - ./.build/storage/dbdata:/var/lib/dbms
     ports:
       - "3306:3306"
     environment:
@@ -29,7 +29,7 @@ services:
     # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
 
   redis:
-    image: ${DOCKER_IMAGE_DIR}redis:${REDIS_VERSION}
+    image: redis:${REDIS_VERSION}
     env_file:
       - .env.local
     ports:
