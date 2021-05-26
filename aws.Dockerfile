@@ -84,10 +84,16 @@ COPY php.ini /usr/local/etc/php/php.ini
 # install dependencies via composer
 ###############################################################################
 WORKDIR $PROJECT_DIRECTORY
-# COPY composer.json $PROJECT_DIRECTORY/composer.json
-# COPY composer.lock $PROJECT_DIRECTORY/composer.lock
-# RUN composer install  --no-interaction
-# RUN composer update  --no-interaction
+COPY composer.json $PROJECT_DIRECTORY/composer.json
+COPY composer.lock $PROJECT_DIRECTORY/composer.lock
+RUN composer config -g repos.packagist composer https://packagist.kr
+RUN composer install \
+    --ignore-platform-reqs \
+    --no-interaction \
+    --no-plugins \
+    --no-scripts \
+    --prefer-dist
+
 ###############################################################################
 # ADD PROEJCT FILES
 ###############################################################################
