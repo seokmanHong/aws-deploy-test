@@ -1,5 +1,4 @@
-# ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app-app
-ARG REPOSITORY=php:8.0.5-apache
+ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app-app
 ARG IMAGE_VERSION=latest
 FROM $REPOSITORY:$IMAGE_VERSION
 
@@ -102,7 +101,6 @@ COPY . $PROJECT_DIRECTORY
 
 RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY
-WORKDIR $PROJECT_DIRECTORY
 
 COPY start.sh /usr/local/bin/start
 
