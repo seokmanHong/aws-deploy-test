@@ -1,4 +1,4 @@
-ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app-app
+ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app
 ARG IMAGE_VERSION=latest
 FROM $REPOSITORY:$IMAGE_VERSION
 
