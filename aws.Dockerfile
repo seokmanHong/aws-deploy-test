@@ -1,8 +1,8 @@
-ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app
+ARG REPOSITORY=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-api-app
 ARG IMAGE_VERSION=latest
 FROM $REPOSITORY:$IMAGE_VERSION
 
-ENV TZ="/usr/share/zoneinfo/Asia/Seoul"
+# ENV TZ="/usr/share/zoneinfo/Asia/Seoul"
 
 ARG PROJECT_DIRECTORY=/web/app
 
@@ -72,21 +72,21 @@ COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 ###############################################################################
 # configure apache
 ###############################################################################
-COPY .build/advertisement-api-app/site.conf /etc/apache2/sites-available/site.conf
+COPY .build/advertiser-api-app/site.conf /etc/apache2/sites-available/site.conf
 RUN a2dissite 000-default.conf && a2ensite site.conf
 RUN a2enmod rewrite
 
 ###############################################################################
 # configure php
 ###############################################################################
-COPY php.ini /usr/local/etc/php/php.ini
+COPY .build/advertiser-api-app/php.ini /usr/local/etc/php/php.ini
 
 ###############################################################################
 # install dependencies via composer
 ###############################################################################
 WORKDIR $PROJECT_DIRECTORY
-COPY composer.json $PROJECT_DIRECTORY/composer.json
-COPY composer.lock $PROJECT_DIRECTORY/composer.lock
+COPY .build/advertiser-api-app/composer.json $PROJECT_DIRECTORY/composer.json
+COPY .build/advertiser-api-app/composer.lock $PROJECT_DIRECTORY/composer.lock
 RUN composer config -g repos.packagist composer https://packagist.kr
 RUN composer install \
     --ignore-platform-reqs \
@@ -103,7 +103,7 @@ COPY . $PROJECT_DIRECTORY
 RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY
 
-COPY start.sh /usr/local/bin/start
+COPY .build/advertiser-api-app/start.sh /usr/local/bin/start
 
 ###############################################################################
 # Before run sh, change its crlf to lf

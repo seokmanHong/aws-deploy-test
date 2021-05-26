@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  advertisement-api:
-    image: ${DOCKER_IMAGE_DIR}advertisement-api-app:${PHP_VERSION}
+  advertiser-api:
+    image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${PHP_VERSION}
     env_file:
       - .env.local
     volumes:

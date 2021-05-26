@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "Advertiser-api-container",
-            "image": "323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertisement-api-app:latest",
+            "image": "323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-api-app:latest",
             "essential": true,
             "memory": 128,
             "portMappings": [

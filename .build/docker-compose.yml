@@ -1,12 +1,12 @@
 version: '3.7'
 
 services:
-  advertisement-api-app:
-    image: ${DOCKER_IMAGE_DIR}advertisement-api-app:${WAS_VERSION}
+  advertiser-api-app:
+    image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${WAS_VERSION}
     env_file:
       - ../.env.local
     build:
-      context: advertisement-api-app
+      context: advertiser-api-app
     depends_on:
       - dbms
       - redis
