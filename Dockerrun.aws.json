@@ -11,12 +11,6 @@
                     "hostPort": 80,
                     "containerPort": 80
                 }
-            ],
-            "mountPoints": [
-                {
-                    "sourceVolume": "awseb-logs-nginx-proxy",
-                    "containerPath": "/web/app"
-                }
             ]
         }
     ]
