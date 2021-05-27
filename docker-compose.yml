@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  advertiser-api:
+  advertiser-api-app:
     image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${WAS_VERSION}
     env_file:
       - .env.local
@@ -10,16 +10,14 @@ services:
     ports:
       - 8002:80
     depends_on:
-      - mysql
+      - dbms
       - redis
 
-  mysql:
-    image: mysql:${MYSQL_VERSION}
+  dbms:
+    image: ${DBMS}
     command: "--innodb_use_native_aio=0"
     env_file:
       - .env.local
-    volumes:
-      - ./.build/storage/dbdata:/var/lib/dbms
     ports:
       - "3306:3306"
     environment:

@@ -7,26 +7,26 @@ services:
       - ../.env.local
     build:
       context: advertiser-api-app
-    depends_on:
-      - dbms
-      - redis
-
-  dbms:
-    image: ${DBMS}
-    env_file:
-      - ../.env.local
-    build:
-      context: ./dbms
-      args:
-        - DBMS=${DBMS}
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=laravel
-    # Add next command on windows environment
-    # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
-
-  redis:
-    image: ${REDIS_VERSION}
+#    depends_on:
+#      - dbms
+#      - redis
+#
+#  dbms:
+#    image: ${DBMS}
+#    env_file:
+#      - ../.env.local
+#    build:
+#      context: ./dbms
+#      args:
+#        - DBMS=${DBMS}
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#      - MYSQL_DATABASE=laravel
+#    # Add next command on windows environment
+#    # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+#
+#  redis:
+#    image: ${REDIS_VERSION}
 
