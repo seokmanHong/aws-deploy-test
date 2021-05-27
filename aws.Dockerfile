@@ -14,13 +14,20 @@ RUN apt-get update
 ###############################################################################
 # default modules
 ###############################################################################
-RUN apt-get install -y libpcre3-dev libzip-dev libxml2-dev git
-RUN docker-php-ext-install zip
+RUN apt-get install -y dos2unix \
+    git \
+    libpcre3-dev \
+    libxml2-dev \
+    libzip-dev \
+    supervisor
 
 ###############################################################################
-# for dbms
+# for docker-php-ext-install
 ###############################################################################
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install bcmath \
+    intl \
+    pdo \
+    pdo_mysql
 
 ###############################################################################
 # INSTALL COMPOSER
@@ -34,15 +41,10 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get install -y jpegoptim optipng pngquant gifsicle
 
 ###############################################################################
-# to prevent window crlf error
-###############################################################################
-RUN apt-get install -y dos2unix
-
-###############################################################################
 # install bcmath
 ###############################################################################
-RUN docker-php-ext-configure bcmath
-RUN docker-php-ext-install bcmath
+#RUN docker-php-ext-configure bcmath
+#RUN docker-php-ext-install bcmath
 
 ###############################################################################
 # install gd with jpeg
@@ -59,14 +61,14 @@ RUN apt-get update && apt-get install -y \
 ###############################################################################
 # install intl for globalization
 ###############################################################################
-RUN docker-php-ext-configure intl
-RUN docker-php-ext-install intl
+#RUN docker-php-ext-configure intl
+#RUN docker-php-ext-install intl
 
 ###############################################################################
 # install & configure supervisor
 ###############################################################################
-RUN apt-get update
-RUN apt-get install -y supervisor
+#RUN apt-get update
+#RUN apt-get install -y supervisor
 COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 
 ###############################################################################
@@ -98,7 +100,7 @@ RUN composer install \
 ###############################################################################
 # ADD PROEJCT FILES
 ###############################################################################
-COPY . $PROJECT_DIRECTORY
+COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
 
 RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY

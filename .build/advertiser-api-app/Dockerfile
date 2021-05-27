@@ -96,7 +96,7 @@ RUN composer install \
 ###############################################################################
 # ADD PROEJCT FILES
 ###############################################################################
-COPY . $PROJECT_DIRECTORY
+COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
 
 RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY
