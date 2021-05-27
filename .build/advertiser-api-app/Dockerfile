@@ -10,60 +10,62 @@ RUN apt-get update
 ###############################################################################
 # default modules
 ###############################################################################
-RUN apt-get install -y libpcre3-dev libzip-dev libxml2-dev git
-RUN docker-php-ext-install zip
+RUN apt-get install -y dos2unix \
+    git \
+    libpcre3-dev \
+    libxml2-dev \
+    libzip-dev \
+    supervisor
 
 ###############################################################################
-# for dbms
+# for docker-php-ext-install
 ###############################################################################
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install zip pdo pdo_mysql bcmath sockets intl
 
 ###############################################################################
-# INSTALL COMPOSER
+# install composer
 ###############################################################################
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
-###############################################################################
-# INSTALL IMAGE OPTIMIZERS USED ON https://github.com/spatie/image-optimizer
-###############################################################################
-RUN apt-get install -y jpegoptim optipng pngquant gifsicle
-
-###############################################################################
-# to prevent window crlf error
-###############################################################################
-RUN apt-get install -y dos2unix
 
 ###############################################################################
 # install bcmath
 ###############################################################################
-RUN docker-php-ext-configure bcmath
-RUN docker-php-ext-install bcmath
+#RUN docker-php-ext-configure bcmath
+#RUN docker-php-ext-install bcmath
 
 ###############################################################################
 # install gd with jpeg
 ###############################################################################
-#RUN apt-get install -y libpng-dev libjpeg62-turbo-dev
-#RUN docker-php-ext-configure gd --with-jpeg
-#RUN docker-php-ext-install gd
-
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev libjpeg62-turbo-dev libpng-dev \
-    && docker-php-ext-install -j$(nproc) iconv \
-    && docker-php-ext-install -j$(nproc) gd
+RUN apt-get update
+RUN apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev
+#RUN docker-php-ext-install -j$(nproc) iconv
+RUN docker-php-ext-install -j$(nproc) gd
 
 ###############################################################################
 # install intl for globalization
 ###############################################################################
-RUN docker-php-ext-configure intl
-RUN docker-php-ext-install intl
+#RUN docker-php-ext-configure intl
+#RUN docker-php-ext-install intl
 
 ###############################################################################
-# install & configure supervisor
+# install redis
 ###############################################################################
-RUN apt-get update
-RUN apt-get install -y supervisor
+RUN pecl install redis && docker-php-ext-enable redis
+
+###############################################################################
+# configure supervisor
+###############################################################################
+#RUN apt-get update
+#RUN apt-get install -y supervisor
 COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
+
+###############################################################################
+# to prevent window crlf error
+###############################################################################
+#RUN apt-get install -y dos2unix
 
 ###############################################################################
 # configure apache
