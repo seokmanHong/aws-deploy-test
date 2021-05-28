@@ -3,10 +3,10 @@ MAINTAINER EXCEEDWEB <excedweb@gmail.com>
 
 ARG ARG_FPM_CONTAINER
 
-COPY advertiser-api/nginx/nginx.conf /etc/nginx/
-COPY advertiser-api/nginx/php-fpm.conf /etc/nginx/
-COPY advertiser-api/nginx/proxy.conf /etc/nginx/
-COPY advertiser-api/nginx/default.conf /etc/nginx/conf.d/
+COPY .build/advertiser-api/nginx/nginx.conf /etc/nginx/
+COPY .build/advertiser-api/nginx/php-fpm.conf /etc/nginx/
+COPY .build/advertiser-api/nginx/proxy.conf /etc/nginx/
+COPY .build/advertiser-api/nginx/default.conf /etc/nginx/conf.d/
 
 RUN sed -i "s/_PHP_FPM_CONTAINER_/$ARG_FPM_CONTAINER/g" /etc/nginx/php-fpm.conf
 RUN cat /etc/nginx/php-fpm.conf
