@@ -65,9 +65,9 @@ RUN docker-php-source extract && \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ############################# copy everything necessary #############################
-COPY start.sh /usr/local/bin/start
-COPY www.conf /usr/local/etc/php-fpm.d/
-COPY supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
+COPY ./start.sh /usr/local/bin/start
+COPY ./www.conf /usr/local/etc/php-fpm.d/
+COPY ./supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 #####################################################################################
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
