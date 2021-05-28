@@ -1,8 +1,9 @@
-FROM nginx:latest
+ARG ARG_WAS_IMAGE
+FROM ${ARG_WAS_IMAGE}
 MAINTAINER EXCEEDWEB <excedweb@gmail.com>
 
-ARG  ARG_FPM_CONTAINER
-ARG  ARG_PHP_FPM_PORT
+ARG ARG_FPM_CONTAINER
+ARG ARG_PHP_FPM_PORT
 
 COPY .build/advertiser-api/nginx/nginx.conf /etc/nginx/
 COPY .build/advertiser-api/nginx/php-fpm.conf /etc/nginx/

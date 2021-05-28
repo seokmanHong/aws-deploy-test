@@ -23,5 +23,3 @@ services:
         ARG_PHP_FPM_PORT: 9001
       context: advertiser-api
       dockerfile: php.Dockerfile
-
-
