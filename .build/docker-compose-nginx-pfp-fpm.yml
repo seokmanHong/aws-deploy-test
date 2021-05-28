@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  advertiser-api:
+    image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
+    env_file:
+      - ../.env.local.nginx
+    build:
+      args:
+        ARG_WAS_IMAGE: nginx:${WAS_VERSION}
+        ARG_FPM_CONTAINER: '127.0.0.1'
+        ARG_PHP_FPM_PORT: 9001
+      context: advertiser-api
+      dockerfile: nginx.Dockerfile
+
+  php-fpm:
+    image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
+    env_file:
+      - ../.env.local.nginx
+    build:
+      args:
+        ARG_PHP_IMAGE: php:${PHP_VERSION}
+        ARG_PHP_FPM_PORT: 9001
+      context: advertiser-api
+      dockerfile: php.Dockerfile
+
+

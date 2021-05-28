@@ -13,6 +13,27 @@ services:
       - dbms
       - redis
 
+  advertiser-api:
+    image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
+    env_file:
+      - .env.local
+    volumes:
+      - .:/www_root/app
+    ports:
+      - 8003:80
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
+    env_file:
+      - .env.local
+    volumes:
+      - .:/www_root/app
+    depends_on:
+      - dbms
+      - redis
+
   dbms:
     image: ${DBMS}
     command: "--innodb_use_native_aio=0"

@@ -98,20 +98,17 @@ RUN composer install \
     --prefer-dist
 
 ###############################################################################
-# ADD PROEJCT FILES
+# add proejct files
 ###############################################################################
 COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
-
 RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY
-
-COPY .build/advertiser-api-app/start.sh /usr/local/bin/start
 
 ###############################################################################
 # Before run sh, change its crlf to lf
 ###############################################################################
+COPY .build/advertiser-api-app/start.sh /usr/local/bin/start
 RUN dos2unix /usr/local/bin/start
-
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]
 
