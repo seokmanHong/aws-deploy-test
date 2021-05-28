@@ -65,13 +65,13 @@ RUN docker-php-source extract && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY php-fpm/www.conf /usr/local/etc/php-fpm.d/
+COPY .build/advertiser-api/php-fpm/www.conf /usr/local/etc/php-fpm.d/
 
 RUN sed -i "s/_PHP_FPM_PORT_/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i "s/9000/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/zz-docker.conf
 
 ######################### supervisor configuration #########################
-COPY php-fpm/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
+COPY .build/advertiser-api/php-fpm/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 ############################################################################
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -82,7 +82,7 @@ VOLUME /www_root/app
 WORKDIR /www_root/app
 
 ########## command script ##########
-COPY php-fpm/start.sh /usr/local/bin/start
+COPY .build/advertiser-api/php-fpm/start.sh /usr/local/bin/start
 RUN dos2unix /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]
