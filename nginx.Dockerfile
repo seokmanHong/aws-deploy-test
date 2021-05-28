@@ -2,11 +2,12 @@ FROM nginx:latest
 MAINTAINER EXCEEDWEB <excedweb@gmail.com>
 
 ARG ARG_FPM_CONTAINER
+ARG BUILD_ROOT_DIR=.build/advertiser-api/nginx
 
-COPY .build/advertiser-api/nginx/nginx.conf /etc/nginx/
-COPY .build/advertiser-api/nginx/php-fpm.conf /etc/nginx/
-COPY .build/advertiser-api/nginx/proxy.conf /etc/nginx/
-COPY .build/advertiser-api/nginx/default.conf /etc/nginx/conf.d/
+COPY $BUILD_ROOT_DIR/nginx.conf /etc/nginx/
+COPY $BUILD_ROOT_DIR/php-fpm.conf /etc/nginx/
+COPY $BUILD_ROOT_DIR/proxy.conf /etc/nginx/
+COPY $BUILD_ROOT_DIR/default.conf /etc/nginx/conf.d/
 
 RUN sed -i "s/_PHP_FPM_CONTAINER_/$ARG_FPM_CONTAINER/g" /etc/nginx/php-fpm.conf
 RUN cat /etc/nginx/php-fpm.conf

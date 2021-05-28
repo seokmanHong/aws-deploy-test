@@ -1,6 +1,8 @@
 FROM php:8.0.6-fpm
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
+ARG BUILD_ROOT_DIR=.build/advertiser-api/php-fpm
+
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -65,9 +67,9 @@ RUN docker-php-source extract && \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ############################# copy everything necessary #############################
-COPY .build/advertiser-api/php-fpm/start.sh /usr/local/bin/start
-COPY .build/advertiser-api/php-fpm/www.conf /usr/local/etc/php-fpm.d/
-COPY .build/advertiser-api/php-fpm/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
+COPY $BUILD_ROOT_DIR/start.sh /usr/local/bin/start
+COPY $BUILD_ROOT_DIR/www.conf /usr/local/etc/php-fpm.d/
+COPY $BUILD_ROOT_DIR/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
 #####################################################################################
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
