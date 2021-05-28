@@ -1,8 +1,6 @@
 FROM php:8.0.6-fpm
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
-ARG ARG_PHP_FPM_PORT
-
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -66,14 +64,11 @@ RUN docker-php-source extract && \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY .build/advertiser-api/php-fpm/www.conf /usr/local/etc/php-fpm.d/
-
-RUN sed -i "s/_PHP_FPM_PORT_/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/www.conf
-RUN sed -i "s/9000/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/zz-docker.conf
-
-######################### supervisor configuration #########################
-COPY .build/advertiser-api/php-fpm/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
-############################################################################
+############################# copy everything necessary #############################
+COPY ./php-fpm/start.sh /usr/local/bin/start
+COPY ./php-fpm/www.conf /usr/local/etc/php-fpm.d/
+COPY ./php-fpm/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.laravel.conf
+#####################################################################################
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV PATH="$PATH:/root/.composer/vendor/bin"
@@ -83,7 +78,6 @@ VOLUME /www_root/app
 WORKDIR /www_root/app
 
 ######################## command script ########################
-COPY .build/advertiser-api/php-fpm/start.sh /usr/local/bin/start
 RUN dos2unix /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]

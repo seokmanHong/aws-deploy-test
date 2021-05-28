@@ -8,8 +8,7 @@ services:
     build:
       args:
         ARG_WAS_IMAGE: nginx:${WAS_VERSION}
-        ARG_FPM_CONTAINER: '127.0.0.1'
-        ARG_PHP_FPM_PORT: 9001
+        ARG_FPM_CONTAINER: 'php-fpm'
       context: advertiser-api
       dockerfile: nginx.Dockerfile
 
@@ -18,7 +17,5 @@ services:
     env_file:
       - ../.env.local.nginx
     build:
-      args:
-        ARG_PHP_FPM_PORT: 9001
       context: advertiser-api
       dockerfile: php.Dockerfile
