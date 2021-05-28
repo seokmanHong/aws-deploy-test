@@ -2,6 +2,7 @@ FROM php:8.0.6-fpm
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
 ARG ARG_PHP_FPM_PORT
+
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -34,7 +35,7 @@ RUN apt-get install -y dos2unix \
 RUN docker-php-ext-install bcmath intl mysqli pdo pdo_mysql soap zip
 
 #####################################################################
-# for image
+# image handler
 #####################################################################
 RUN apt-get install -y libfreetype6-dev libpng-dev libjpeg62-turbo-dev \
     libxpm-dev libwebp-dev libzip-dev libxml2-dev
@@ -81,9 +82,9 @@ RUN mkdir -p /www_root/app/public
 VOLUME /www_root/app
 WORKDIR /www_root/app
 
-########## command script ##########
+######################## command script ########################
 COPY .build/advertiser-api/php-fpm/start.sh /usr/local/bin/start
 RUN dos2unix /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]
-####################################
+################################################################
