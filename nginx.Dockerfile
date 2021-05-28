@@ -15,6 +15,7 @@ RUN find /etc/nginx -type f -exec chmod 0644 {} \; && mkdir -p /www_root/app/pub
 
 RUN chown www-data:www-data /www_root/app -R
 RUN chmod 755 /www_root/app
+RUN chmod 755 /www_root/app/public
 
 VOLUME /www_root/app
 WORKDIR /www_root/app
