@@ -21,4 +21,5 @@ env=${APP_ENV:-local}
 #    echo "Could not match the container env \"$env\""
 #    exit 1
 #fi
-exec php-fpm -F -R & supervisord --nodaemon --configuration /etc/supervisor/supervisord.conf
+# exec php-fpm -F -R & supervisord --nodaemon --configuration /etc/supervisor/supervisord.conf
+exec php-fpm -F -R
