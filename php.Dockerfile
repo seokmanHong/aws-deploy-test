@@ -2,6 +2,7 @@ FROM php:8.0.6-fpm
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
 ARG BUILD_ROOT_DIR=.build/advertiser-api/php-fpm
+ARG PROJECT_DIRECTORY=/www_root/app
 
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_FRONTEND noninteractive
@@ -75,9 +76,11 @@ COPY $BUILD_ROOT_DIR/supervisor.laravel.conf /etc/supervisor/conf.d/supervisor.l
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV PATH="$PATH:/root/.composer/vendor/bin"
 
-RUN mkdir -p /www_root/app/public
-VOLUME /www_root/app
-WORKDIR /www_root/app
+COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
+RUN mkdir -p $PROJECT_DIRECTORY/public
+
+VOLUME $PROJECT_DIRECTORY
+WORKDIR $PROJECT_DIRECTORY
 
 ######################## command script ########################
 RUN dos2unix /usr/local/bin/start

@@ -1,5 +1,8 @@
 version: '3.7'
 
+networks:
+  service:
+
 services:
   advertiser-api-app:
     image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${WAS_VERSION}
@@ -12,6 +15,8 @@ services:
     depends_on:
       - dbms
       - redis
+    networks:
+      - service
 
   advertiser-api:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
@@ -23,6 +28,8 @@ services:
       - 8003:80
     depends_on:
       - php-fpm
+    networks:
+      - service
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
@@ -33,7 +40,8 @@ services:
     depends_on:
       - dbms
       - redis
-
+    networks:
+      - service
   dbms:
     image: ${DBMS}
     command: "--innodb_use_native_aio=0"
@@ -46,6 +54,8 @@ services:
       - MYSQL_DATABASE=laravel
     # Add next command on windows environment
     # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
+    networks:
+      - service
 
   redis:
     image: ${REDIS_VERSION}
@@ -53,3 +63,5 @@ services:
       - .env.local
     ports:
       - "6379:6379"
+    networks:
+      - service
