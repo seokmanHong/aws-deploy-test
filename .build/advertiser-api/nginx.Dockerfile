@@ -3,10 +3,10 @@ MAINTAINER EXCEEDWEB <excedweb@gmail.com>
 
 ARG ARG_FPM_CONTAINER
 
-COPY nginx/nginx.conf /etc/nginx/
-COPY nginx/php-fpm.conf /etc/nginx/
-COPY nginx/proxy.conf /etc/nginx/
-COPY nginx/conf.d/default.conf /etc/nginx/conf.d/
+COPY ./nginx/nginx.conf /etc/nginx/
+COPY ./nginx/php-fpm.conf /etc/nginx/
+COPY ./nginx/proxy.conf /etc/nginx/
+COPY ./nginx/conf.d/default.conf /etc/nginx/conf.d/
 
 RUN sed -i "s/_PHP_FPM_CONTAINER_/$ARG_FPM_CONTAINER/g" /etc/nginx/php-fpm.conf
 
