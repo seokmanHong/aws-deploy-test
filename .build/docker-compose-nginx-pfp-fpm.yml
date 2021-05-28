@@ -4,18 +4,15 @@ services:
   advertiser-api:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
     env_file:
-      - ../.env.local.nginx
+      - ../.env.local.build
     build:
       args:
-        ARG_WAS_IMAGE: nginx:${WAS_VERSION}
         ARG_FPM_CONTAINER: 'php-fpm'
-      context: advertiser-api
-      dockerfile: nginx.Dockerfile
+      context: advertiser-api/nginx
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
     env_file:
-      - ../.env.local.nginx
+      - ../.env.local.build
     build:
-      context: advertiser-api
-      dockerfile: php.Dockerfile
+      context: advertiser-api/php-fpm
