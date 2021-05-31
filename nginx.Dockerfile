@@ -13,6 +13,8 @@ COPY $BUILD_ROOT_DIR/default.conf /etc/nginx/conf.d/
 RUN cat /etc/nginx/php-fpm.conf
 RUN find /etc/nginx -type f -exec chmod 0644 {} \; && mkdir -p /www_root/app/public
 
+COPY . /www_root/app
+
 RUN chown www-data:www-data /www_root/app -R
 RUN chmod 755 /www_root/app
 RUN chmod 755 /www_root/app/public
