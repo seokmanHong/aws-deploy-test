@@ -4,23 +4,11 @@ services:
   advertiser-api:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
     build:
-      args:
-        APP_ENV: ${APP_ENV}
-        ARG_PHP_FPM_CONTAINER: ${ARG_PHP_FPM_CONTAINER}
-        ARG_PHP_FPM_PORT: ${ARG_PHP_FPM_PORT}
       context: .
-      dockerfile: nginx.Dockerfile
-    ports:
-      - "8002:80"
-    depends_on:
-      - php-fpm
+      dockerfile: .build/nginx.Dockerfile
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
     build:
-      args:
-        APP_ENV: ${APP_ENV}
-        ARG_PHP_FPM_HOST: ${ARG_PHP_FPM_HOST}
-        ARG_PHP_FPM_PORT: ${ARG_PHP_FPM_PORT}
       context: .
       dockerfile: .build/php.Dockerfile

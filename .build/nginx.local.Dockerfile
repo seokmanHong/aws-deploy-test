@@ -17,7 +17,7 @@ RUN cat /etc/nginx/php-fpm.conf
 RUN find /etc/nginx -type f -exec chmod 0644 {} \; && mkdir -p /www_root/app/public
 
 COPY . /www_root/app
-COPY .env.${APP_ENV} /www_root/app/.env
+COPY .build/.env.$APP_ENV /www_root/app/.env
 
 RUN chown www-data:www-data /www_root/app -R
 RUN chmod 755 /www_root/app/public
