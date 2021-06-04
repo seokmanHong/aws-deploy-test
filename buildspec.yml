@@ -1,12 +1,12 @@
 version: 0.2
 
-#env:
-#  variables:
-#    APP_ENV: 'production'
-#    ARG_PHP_FPM_CONTAINER: '127.0.0.1'
-#    ARG_PHP_FPM_PORT: '9000'
-#    REPOSITORY_URI_NGINX: '323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-nginx'
-#    REPOSITORY_URI_PHP_FPM: '323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-php-fpm'
+env:
+  variables:
+    APP_ENV: 'production'
+    ARG_PHP_FPM_CONTAINER: '127.0.0.1'
+    ARG_PHP_FPM_PORT: '9000'
+    REPOSITORY_URI_NGINX: '323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-nginx'
+    REPOSITORY_URI_PHP_FPM: '323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-php-fpm'
 
 phases:
   install:
