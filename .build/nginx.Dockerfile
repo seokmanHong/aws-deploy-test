@@ -5,6 +5,7 @@ ARG BUILD_ROOT_DIR=.build/advertiser-api/nginx
 ARG ARG_PHP_FPM_CONTAINER=127.0.0.1
 ARG ARG_PHP_FPM_PORT=9000
 ARG APP_ENV
+ENV ENV_APP_ENV=$APP_ENV
 
 COPY $BUILD_ROOT_DIR/nginx.conf /etc/nginx/
 COPY $BUILD_ROOT_DIR/php-fpm.conf /etc/nginx/
@@ -17,7 +18,7 @@ RUN cat /etc/nginx/php-fpm.conf
 RUN find /etc/nginx -type f -exec chmod 0644 {} \; && mkdir -p /www_root/app/public
 
 COPY . /www_root/app
-COPY .build/.env.$APP_ENV /www_root/app/.env
+COPY .build/.env.$ENV_APP_ENV /www_root/app/.env
 
 RUN chown www-data:www-data /www_root/app -R
 RUN chmod 755 /www_root/app/public
