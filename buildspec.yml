@@ -20,7 +20,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image...
       - echo $REPOSITORY_URI_NGINX:$IMAGE_TAG
-      - docker build --build-arg APP_ENV $APP_ENV -t $REPOSITORY_URI_NGINX:$IMAGE_TAG -f .build/nginx.Dockerfile .
+      - docker build -t $REPOSITORY_URI_NGINX:$IMAGE_TAG --build-arg APP_ENV $APP_ENV -f .build/nginx.Dockerfile .
       - docker tag $REPOSITORY_URI_NGINX:$IMAGE_TAG $REPOSITORY_URI_NGINX:$IMAGE_TAG
       - echo $REPOSITORY_URI_PHP_FPM:$IMAGE_TAG
       - docker build -t $REPOSITORY_URI_PHP_FPM:$IMAGE_TAG -f .build/php.Dockerfile .
