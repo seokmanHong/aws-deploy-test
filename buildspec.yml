@@ -8,7 +8,7 @@ phases:
     commands:
       - echo Composer downloading package
       - composer install --no-progress --ignore-platform-reqs
-      - echo $APP_ENV $AWS_DEFAULT_REGION $IMAGE_TAG
+#      - echo $APP_ENV $AWS_DEFAULT_REGION $IMAGE_TAG
       - cp .build/.env.${APP_ENV} .env
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
