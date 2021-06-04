@@ -1,67 +1,26 @@
 version: '3.7'
 
-networks:
-  service:
-
 services:
-  advertiser-api-app:
-    image: ${DOCKER_IMAGE_DIR}advertiser-api-app:${WAS_VERSION}
-    env_file:
-      - .env.local
-    volumes:
-      - .:/web/app
-    ports:
-      - 8002:80
-    depends_on:
-      - dbms
-      - redis
-    networks:
-      - service
-
   advertiser-api:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
-    env_file:
-      - .env.local
-    volumes:
-      - .:/www_root/app
+    build:
+      args:
+        APP_ENV: ${APP_ENV}
+        ARG_PHP_FPM_CONTAINER: ${ARG_PHP_FPM_CONTAINER}
+        ARG_PHP_FPM_PORT: ${ARG_PHP_FPM_PORT}
+      context: .
+      dockerfile: .build/nginx.Dockerfile
     ports:
-      - 8003:80
+      - "8002:80"
     depends_on:
       - php-fpm
-    networks:
-      - service
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
-    env_file:
-      - .env.local
-    volumes:
-      - .:/www_root/app
-    depends_on:
-      - dbms
-      - redis
-    networks:
-      - service
-  dbms:
-    image: ${DBMS}
-    command: "--innodb_use_native_aio=0"
-    env_file:
-      - .env.local
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
-      - MYSQL_DATABASE=laravel
-    # Add next command on windows environment
-    # command: --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
-    networks:
-      - service
-
-  redis:
-    image: ${REDIS_VERSION}
-    env_file:
-      - .env.local
-    ports:
-      - "6379:6379"
-    networks:
-      - service
+    build:
+      args:
+        APP_ENV: ${APP_ENV}
+        ARG_PHP_FPM_HOST: ${ARG_PHP_FPM_HOST}
+        ARG_PHP_FPM_PORT: ${ARG_PHP_FPM_PORT}
+      context: .
+      dockerfile: .build/php.Dockerfile

@@ -1,6 +1,0 @@
-[
-    {
-        "name": "app",
-        "imageUri": "323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-api-app:latest"
-    }
-]
