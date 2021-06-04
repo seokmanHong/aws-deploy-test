@@ -4,6 +4,8 @@ services:
   advertiser-api:
     environment:
       - APP_ENV=production
+    args:
+      APP_ENV:production
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
     build:
       context: .
