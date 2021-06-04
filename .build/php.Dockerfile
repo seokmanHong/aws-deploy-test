@@ -104,9 +104,9 @@ RUN mkdir -p $PROJECT_DIRECTORY/public
 VOLUME $PROJECT_DIRECTORY
 WORKDIR $PROJECT_DIRECTORY
 
-###################################################################################
+###################################
 # Command script
-###################################################################################
+###################################
 RUN dos2unix /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]
