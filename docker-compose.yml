@@ -7,7 +7,8 @@ services:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
     build:
       context: .
-      env_file: .build/.env.production
+      env_file:
+        - .build/.env.production
       dockerfile: .build/nginx.Dockerfile
 
   php-fpm:
