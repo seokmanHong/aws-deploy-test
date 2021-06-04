@@ -9,7 +9,7 @@ services:
         ARG_PHP_FPM_CONTAINER: ${ARG_PHP_FPM_CONTAINER}
         ARG_PHP_FPM_PORT: ${ARG_PHP_FPM_PORT}
       context: .
-      dockerfile: .build/nginx.Dockerfile
+      dockerfile: nginx.Dockerfile
     ports:
       - "8002:80"
     depends_on:
