@@ -1,7 +1,6 @@
 version: 0.2
 
 env:
-  shell: shell-tag
   variables:
     APP_ENV: 'production'
     ARG_PHP_FPM_CONTAINER: '127.0.0.1'
