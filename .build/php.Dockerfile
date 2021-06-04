@@ -3,9 +3,9 @@ MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
 ARG BUILD_ROOT_DIR=.build/advertiser-api/php-fpm
 ARG PROJECT_DIRECTORY=/www_root/app
-ARG ARG_PHP_FPM_PORT=9000
-ARG ARG_PHP_FPM_HOST=127.0.0.1
-ARG APP_ENV=production
+ARG ARG_PHP_FPM_PORT
+ARG ARG_PHP_FPM_CONTAINER
+ARG APP_ENV
 
 ENV DEBCONF_NOWARNINGS yes
 ENV DEBIAN_FRONTEND noninteractive
@@ -83,7 +83,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 COPY $BUILD_ROOT_DIR/start.sh /usr/local/bin/start
 COPY $BUILD_ROOT_DIR/www.conf /usr/local/etc/php-fpm.d/
 RUN sed -i "s/_PHP_FPM_PORT_/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/www.conf
-RUN sed -i "s/_PHP_FPM_HOST_/$ARG_PHP_FPM_HOST/g" /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i "s/_PHP_FPM_HOST_/$ARG_PHP_FPM_CONTAINER/g" /usr/local/etc/php-fpm.d/www.conf
 RUN sed -i "s/9000/$ARG_PHP_FPM_PORT/g" /usr/local/etc/php-fpm.d/zz-docker.conf
 RUN cat /usr/local/etc/php-fpm.d/www.conf
 

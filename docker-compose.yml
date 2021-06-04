@@ -2,20 +2,15 @@ version: '3.7'
 
 services:
   advertiser-api:
-    environment:
-      - APP_ENV=production
-    args:
-      APP_ENV:production
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
     build:
       context: .
-      env_file:
-        - .env.production
+      env_file: .build/.env.local
       dockerfile: .build/nginx.Dockerfile
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
     build:
       context: .
-      env_file: .build/.env.production
+      env_file: .build/.env.local
       dockerfile: .build/php.Dockerfile
