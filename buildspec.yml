@@ -23,6 +23,9 @@ phases:
 #      - $(aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin "$(aws sts get-caller-identity --query Account --output text).dkr.ecr.ap-northeast-2.amazonaws.com")
       - REPOSITORY_URI_NGINX=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-nginx
       - REPOSITORY_URI_PHP_FPM=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-php-fpm
+      - APP_ENV=production
+      - ARG_PHP_FPM_CONTAINER=127.0.0.1
+      - ARG_PHP_FPM_PORT=9000
   build:
     commands:
       - echo Build started on `date`
