@@ -23,7 +23,7 @@ phases:
       - docker build \
         --build-arg APP_ENV=$APP_ENV \
         --build-arg ARG_PHP_FPM_CONTAINER=$ARG_PHP_FPM_CONTAINER \
-        --build-arg ARG_PHP_FPM_PORT=$--build-arg \
+        --build-arg ARG_PHP_FPM_PORT=$ARG_PHP_FPM_PORT \
         -t $REPOSITORY_URI_NGINX:$IMAGE_TAG \
         -f .build/nginx.Dockerfile .
       - docker tag $REPOSITORY_URI_NGINX:$IMAGE_TAG $REPOSITORY_URI_NGINX:$IMAGE_TAG
