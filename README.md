@@ -10,9 +10,7 @@
 git clone http://advertiser-app.git .
 ```
 
-#### How to run local advertiser application
-
-Run followings where `docker-compose.yml` located in
+- Run followings where `docker-compose.yml` located in
 ```bash
 docker-compose --env-file .build/.env.local \
   up -d \ 
@@ -24,7 +22,7 @@ Local service url might be : [http://localhost:8001](http://localhost:8001)
 
 You can change your proxy service port in `docker-compose.yml` as well
 
-## Project version
+## Package version
 Laravel : 8.X
 
 PHP: 8.0.6
