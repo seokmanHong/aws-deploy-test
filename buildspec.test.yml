@@ -6,14 +6,12 @@ phases:
       docker: 19
   pre_build:
     commands:
-      - docker login -u exceedweb -p Ayeon_1004
-      - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI_MYSQL=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-unit-test-mysql
       - docker run
         --name mysql
         -e MYSQL_ALLOW_EMPTY_PASSWORD=yes
-        -e MYSQL_ROOT_PASSWORD=R00t+
+        -e MYSQL_ROOT_PASSWORD=root_password
         -e MYSQL_USER=advertiser
         -e MYSQL_PASSWORD=password
         -e MYSQL_DATABASE=testing
@@ -21,7 +19,5 @@ phases:
         $REPOSITORY_URI_MYSQL:latest
       - echo Composer downloading package
       - composer install --no-progress --ignore-platform-reqs
-
-  build:
-    commands:
       - php artisan test
+

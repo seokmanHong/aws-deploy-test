@@ -6,7 +6,6 @@ phases:
       docker: 19
   pre_build:
     commands:
-      - docker login -u exceedweb -p Ayeon_1004
       - echo Composer downloading package
       - composer install --no-progress --ignore-platform-reqs
       - echo $APP_ENV $AWS_DEFAULT_REGION $IMAGE_TAG
