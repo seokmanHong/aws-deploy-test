@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+  pre_build:
+    commands:
+      - docker login -u exceedweb -p Ayeon_1004
+      - echo Composer downloading package
+      - composer install --no-progress --ignore-platform-reqs
+      - echo $APP_ENV $AWS_DEFAULT_REGION $IMAGE_TAG
+      - cp .build/.env.$APP_ENV .env
+      - php artisan test
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI_MYSQL=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-unit-test-mysql
+

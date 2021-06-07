@@ -16,6 +16,7 @@ phases:
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI_NGINX=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-nginx
       - REPOSITORY_URI_PHP_FPM=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-php-fpm
+      - REPOSITORY_URI_MYSQL=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-unit-test-mysql
   build:
     commands:
       - echo Build started on `date`
