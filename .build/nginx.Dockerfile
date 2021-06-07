@@ -1,4 +1,5 @@
-FROM nginx:latest
+ARG NGINX_VERSION
+FROM nginx:${NGINX_VERSION}
 MAINTAINER EXCEEDWEB <excedweb@gmail.com>
 
 ARG BUILD_ROOT_DIR=.build/advertiser-api/nginx

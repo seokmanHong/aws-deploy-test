@@ -1,4 +1,5 @@
-FROM php:8.0.6-fpm
+ARG PHP_VERSION
+FROM php:${PHP_VERSION}
 MAINTAINER EXCEEDWEB <exceedweb@gmail.com>
 
 ARG BUILD_ROOT_DIR=.build/advertiser-api/php-fpm

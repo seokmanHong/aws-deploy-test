@@ -2,15 +2,27 @@ version: '3.7'
 
 services:
   advertiser-api:
-    image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${WAS_VERSION}
+    image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${AWS_WAS_VERSION}
     build:
+      args:
+        APP_ENV: $APP_ENV
+        NGINX_VERSION: $NGINX_VERSION
+        ARG_PHP_FPM_CONTAINER: $ARG_PHP_FPM_CONTAINER
+        ARG_PHP_FPM_PORT: $ARG_PHP_FPM_PORT
       context: .
-      env_file: .build/.env.local
       dockerfile: .build/nginx.Dockerfile
+    ports:
+      - "8002:80"
+    depends_on:
+      - php-fpm
 
   php-fpm:
-    image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${WAS_VERSION}
+    image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${AWS_WAS_VERSION}
     build:
+      args:
+        APP_ENV: $APP_ENV
+        PHP_VERSION: $PHP_VERSION
+        ARG_PHP_FPM_CONTAINER: $ARG_PHP_FPM_CONTAINER
+        ARG_PHP_FPM_PORT: $ARG_PHP_FPM_PORT
       context: .
-      env_file: .build/.env.local
       dockerfile: .build/php.Dockerfile
