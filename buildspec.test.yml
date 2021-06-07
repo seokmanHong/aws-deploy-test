@@ -20,4 +20,3 @@ phases:
       - echo Composer downloading package
       - composer install --no-progress --ignore-platform-reqs
       - php artisan test
-
