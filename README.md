@@ -1,30 +1,38 @@
-## About Studiomate new api
+# Advertiser api
+*Studiomate advertiser service*
 
-###*Major packages*
+-----------------------------------
 
-```composer.json
-"require": {
-        ...
-        "aws/aws-sdk-php": "^3.178",
-        "aws/aws-sdk-php-laravel": "^3.6",
-        "edujugon/push-notification": "^4.5",
-        "laravel/slack-notification-channel": "^2.3",
-        "owen-it/laravel-auditing": "^12.0",
-        "phpoffice/phpspreadsheet": "^1.17",
-        "predis/predis": "^1.1",
-        "ramsey/uuid": "^4.1",
-        "spatie/laravel-activitylog": "^3.17",
-        "spatie/laravel-failed-job-monitor": "^4.0",
-        "spatie/laravel-permission": "^4.0",
-        "spatie/laravel-query-builder": "^3.3",
-        "spomky-labs/otphp": "^10.0"
-        ...
-    },
-    "require-dev": {
-        ...
-        "barryvdh/laravel-ide-helper": "^2.9",
-        "mnabialek/laravel-sql-logger": "^2.2",
-        ...
-    },
+##### Initial setup
+
+- Download git Repository.
+```bash
+git clone http://advertiser-app.git .
 ```
----
+
+#### How to run local advertiser application
+
+Run followings where `docker-compose.yml` located in
+```bash
+docker-compose --env-file .build/.env.local \
+  up -d \ 
+  advertiser-api mysql redis
+```
+
+
+Local service url might be : [http://localhost:8001](http://localhost:8001)
+
+You can change your proxy service port in `docker-compose.yml` as well
+
+## Project version
+Laravel : 8.X
+
+PHP: 8.0.6
+
+Nginx: 1.24.0
+
+-----------------------
+
+> Do not modify anything under `.build`
+>
+> if you do not fully understand the code in it  
