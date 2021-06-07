@@ -10,7 +10,15 @@ phases:
       - aws --version
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI_MYSQL=323538435273.dkr.ecr.ap-northeast-2.amazonaws.com/advertiser-unit-test-mysql
-      - docker run --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -d -p 3306:3306 $REPOSITORY_URI_MYSQL:latest
+      - docker run
+        --name mysql
+        -e MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        -e MYSQL_ROOT_PASSWORD: R00t+
+        -e MYSQL_USER: advertiser
+        -e MYSQL_PASSWORD: D5d&^f76g*(&H
+        -e MYSQL_DATABASE=testing
+        -d -p 3306:3306
+        $REPOSITORY_URI_MYSQL:latest
       - echo Composer downloading package
       - composer install --no-progress --ignore-platform-reqs
 
