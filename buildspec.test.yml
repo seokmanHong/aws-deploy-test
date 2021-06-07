@@ -15,7 +15,7 @@ phases:
         -e MYSQL_ALLOW_EMPTY_PASSWORD=yes
         -e MYSQL_ROOT_PASSWORD=R00t+
         -e MYSQL_USER=advertiser
-        -e MYSQL_PASSWORD=D5d&^f76g*(&H
+        -e MYSQL_PASSWORD=password
         -e MYSQL_DATABASE=testing
         -d -p 3306:3306
         $REPOSITORY_URI_MYSQL:latest
