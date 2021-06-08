@@ -90,8 +90,8 @@ RUN cat /usr/local/etc/php-fpm.d/www.conf
 
 COPY $BUILD_ROOT_DIR/supervisor.laravel.conf \
     /etc/supervisor/conf.d/supervisor.laravel.conf
-# COPY . $PROJECT_DIRECTORY
 
+COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
 COPY .build/.env.$APP_ENV /www_root/app/.env
 RUN cat /www_root/app/.env
 
@@ -99,10 +99,9 @@ RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/local/bin --filename=composer
 ENV PATH="$PATH:/root/.composer/vendor/bin"
 
-COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
 RUN mkdir -p $PROJECT_DIRECTORY/public
 
-VOLUME $PROJECT_DIRECTORY
+#VOLUME $PROJECT_DIRECTORY
 WORKDIR $PROJECT_DIRECTORY
 
 ###################################

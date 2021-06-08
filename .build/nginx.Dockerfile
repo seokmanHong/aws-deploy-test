@@ -17,11 +17,10 @@ RUN sed -i "s/_PHP_FPM_PORT_/$ARG_PHP_FPM_PORT/g" /etc/nginx/php-fpm.conf
 RUN cat /etc/nginx/php-fpm.conf
 RUN find /etc/nginx -type f -exec chmod 0644 {} \; && mkdir -p /www_root/app/public
 
-COPY . /www_root/app
+COPY --chown=www-data:www-data . $PROJECT_DIRECTORY
 COPY .build/.env.$APP_ENV /www_root/app/.env
 
-RUN chown www-data:www-data /www_root/app -R
 RUN chmod 755 /www_root/app/public
 
-VOLUME /www_root/app
+#VOLUME /www_root/app
 WORKDIR /www_root/app

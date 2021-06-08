@@ -3,6 +3,8 @@ version: '3.7'
 services:
   advertiser-api:
     image: ${DOCKER_IMAGE_DIR}advertiser-nginx:${AWS_WAS_VERSION}
+    volumes:
+      - .:/www_root/app
     build:
       args:
         APP_ENV: $APP_ENV
@@ -18,6 +20,8 @@ services:
 
   php-fpm:
     image: ${DOCKER_IMAGE_DIR}advertiser-php-fpm:${AWS_WAS_VERSION}
+    volumes:
+      - .:/www_root/app
     build:
       args:
         APP_ENV: $APP_ENV
