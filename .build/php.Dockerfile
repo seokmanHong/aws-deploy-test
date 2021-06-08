@@ -101,7 +101,7 @@ ENV PATH="$PATH:/root/.composer/vendor/bin"
 
 RUN mkdir -p $PROJECT_DIRECTORY/public
 
-#VOLUME $PROJECT_DIRECTORY
+VOLUME $PROJECT_DIRECTORY
 WORKDIR $PROJECT_DIRECTORY
 
 ###################################
@@ -110,4 +110,3 @@ WORKDIR $PROJECT_DIRECTORY
 RUN dos2unix /usr/local/bin/start
 RUN chmod u+x /usr/local/bin/start
 CMD ["/usr/local/bin/start"]
-

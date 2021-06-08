@@ -22,5 +22,5 @@ COPY .build/.env.$APP_ENV /www_root/app/.env
 
 RUN chmod 755 /www_root/app/public
 
-#VOLUME /www_root/app
+VOLUME /www_root/app
 WORKDIR /www_root/app

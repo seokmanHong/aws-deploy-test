@@ -9,14 +9,11 @@
 /public/storage
 /storage/*.key
 /vendor
-.env.local
-.env.backup
+.env
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
-npm-debug.log
-yarn-error.log
 
 **/.DS_Store
 .*.php
