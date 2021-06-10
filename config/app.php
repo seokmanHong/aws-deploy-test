@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
         OwenIt\Auditing\AuditingServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
 
         /*
          * Application Service Providers...
