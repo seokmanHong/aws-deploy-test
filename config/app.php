@@ -167,6 +167,7 @@ return [
          */
         OwenIt\Auditing\AuditingServiceProvider::class,
         Kreait\Laravel\Firebase\ServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
